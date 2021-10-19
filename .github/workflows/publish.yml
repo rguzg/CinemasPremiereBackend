@@ -7,7 +7,7 @@ on:
 jobs:
   prisma_deploy:
     name: Run Prisma Deploy
-    runs on: ubuntu-latest
+    runs-on: ubuntu-latest
     env:
       PRISMA_MANAGEMENT_API_SECRET: ${{ secrets.PRISMA_MANAGEMENT_API_SECRET }}
     steps:
