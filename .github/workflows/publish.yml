@@ -11,11 +11,12 @@ jobs:
     env:
       PRISMA_MANAGEMENT_API_SECRET: ${{ secrets.PRISMA_MANAGEMENT_API_SECRET }}
     steps:
-      - name: Install Prisma CLI
+      - name: Install Node
         uses: actions/setup-node@v2
         with:
           node-version: '14'
           cache: 'npm'
+      - name: Install Prisma CLI
         run: npm install @prisma/cli
       - name: Deploy to Prisma Cloud
         run: prisma deploy
