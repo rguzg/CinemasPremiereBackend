@@ -2,15 +2,19 @@ name: CinemasPremiereCD
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
 jobs:
   prisma_deploy:
     name: Run Prisma Deploy
-    uses: actions/setup-node@v2
-    with:
-      node-version: '14'
-      cache: 'npm'
+    runs on: ubuntu-latest
     env:
       PRISMA_MANAGEMENT_API_SECRET: ${{ secrets.PRISMA_MANAGEMENT_API_SECRET }}
-    run: npm install @prisma/cli
-    run: prisma deploy
+    steps:
+      - name: Install Prisma CLI
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'npm'
+        run: npm install @prisma/cli
+      - name: Deploy to Prisma Cloud
+        run: prisma deploy
