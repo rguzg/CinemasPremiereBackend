@@ -16,6 +16,6 @@ jobs:
         with:
           node-version: '14'
       - name: Install Prisma CLI
-        run: npm install prisma@1.34.10
+        run: npm install -g prisma@1.34.10
       - name: Deploy to Prisma Cloud
         run: prisma deploy
