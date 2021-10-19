@@ -4,8 +4,5 @@ services:
     image: cinemaspremierebackend
     container_name: cinemaspremierebackend
     build: .
-    environment:
-      # Used by prisma deploy
-      - PRISMA_MANAGEMENT_API_SECRET=KM06ddQupVFUew
     ports:
       - 4000:4000
