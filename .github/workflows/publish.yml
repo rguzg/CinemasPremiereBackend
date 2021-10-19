@@ -8,9 +8,6 @@ jobs:
   prisma_deploy:
     name: Run Prisma Deploy
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: CinemasPremiereBackend
     env:
       PRISMA_MANAGEMENT_API_SECRET: ${{ secrets.PRISMA_MANAGEMENT_API_SECRET }}
     steps:
