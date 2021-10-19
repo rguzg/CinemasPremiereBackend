@@ -15,7 +15,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-          cache: 'npm'
       - name: Install Prisma CLI
         run: npm install prisma@1.34.10
       - name: Deploy to Prisma Cloud
