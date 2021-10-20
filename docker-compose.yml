@@ -7,7 +7,9 @@ services:
       context: .
       args:
         ENVIRONMENT: ${ENVIRONMENT}
-        URL_BASE: ${URL_BASE}
+        # The URL_BASE used when generating the types used by the Prisma ORM is slightly
+        # different than the one used to call the GraphQL Server. That's why URL_BASE is here twice
+        URL_BASE: ${GENERATE_URL_BASE}
     environment:
       ENVIRONMENT: ${ENVIRONMENT}
       URL_BASE: ${URL_BASE}
