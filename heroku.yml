@@ -1,7 +1,10 @@
 setup:
   config:
-    ENVIRONMENT: 'production'
-    NODE_ENV: 'production'
+    ENVIRONMENT: production
+    NODE_ENV: production
 build:
+  config:
+    ENVIRONMENT: production
+    URL_BASE: http://147.182.187.121:4466/taller2021/rguzman
   docker:
     web: Dockerfile
