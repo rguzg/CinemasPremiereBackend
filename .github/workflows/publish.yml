@@ -20,4 +20,4 @@ jobs:
       - name: Debug
         run: pwd
       - name: Deploy to Prisma Cloud
-        run: prisma deploy
+        run: prisma deploy -p ./prisma/prisma.yml
