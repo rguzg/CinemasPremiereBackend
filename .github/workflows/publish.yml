@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PRISMA_MANAGEMENT_API_SECRET: ${{ secrets.PRISMA_MANAGEMENT_API_SECRET }}
+      URL_BASE: http://147.182.187.121:4466/taller2021/rguzman
+      ENVIRONMENT: development
     steps:
       - name: Include repo contents in workspace
         uses: actions/checkout@v2
