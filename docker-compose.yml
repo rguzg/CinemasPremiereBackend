@@ -3,6 +3,14 @@ services:
   app:
     image: cinemaspremierebackend
     container_name: cinemaspremierebackend
-    build: .
+    build:
+      context: .
+      args:
+        ENVIRONMENT: ${ENVIRONMENT}
+        URL_BASE: ${URL_BASE}
+    environment:
+      ENVIRONMENT: ${ENVIRONMENT}
+      URL_BASE: ${URL_BASE}
+      NODE_ENV: ${NODE_ENV}
     ports:
       - 4000:4000
