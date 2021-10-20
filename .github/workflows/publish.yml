@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set ENVRIONMENT value if branch is main
-        if: ${{github.ref == refs/heads/main}}
+        if: ${{github.ref == 'refs/heads/main'}}
         run: echo "ENVIRONMENT=production" >> $GITHUB_ENV
       - name: Set ENVIRONMENT value if branch is dev
-        if: ${{github.ref == refs/heads/dev || github.ref == refs/heads/feature/InitialConfig}}
+        if: ${{github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/feature/InitialConfig'}}
         run: echo "ENVIRONMENT=development" >> $GITHUB_ENV
       - name: Include repo contents in workspace
         uses: actions/checkout@v2
