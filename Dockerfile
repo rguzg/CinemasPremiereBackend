@@ -16,6 +16,8 @@ RUN yarn install
 
 COPY --chown=node . ${WORKDIR}
 
+RUN prisma generate
+
 EXPOSE 4000
 
 CMD ["yarn", "start"]
