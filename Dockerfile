@@ -1,5 +1,9 @@
 FROM node:14-alpine
 
+ARG ENVIRONMENT
+
+ARG URL_BASE
+
 ENV PATH="$PATH:/home/node/.yarn/bin"
 
 USER node
