@@ -1,0 +1,7 @@
+setup:
+  config:
+    ENVIRONMENT: production
+    NODE_ENV: production
+build:
+  docker:
+    web: Dockerfile
