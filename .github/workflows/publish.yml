@@ -12,14 +12,11 @@ jobs:
     name: Run Prisma Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Set ENVRIONMENT value as production if push on main
+      - name: Set ENVRIONMENT value depending on pushed branch
         if: ${{github.ref == refs/heads/main}}
-        env:
-          ENVIRONMENT: production
-      - name: Set ENVRIONMENT value as development if push on dev
+        run: echo "ENVIRONMENT=production" >> $GITHUB_ENV
         if: ${{github.ref == refs/heads/dev || github.ref == refs/heads/feature/InitialConfig}}
-        env:
-          ENVIRONMENT: development
+        run: echo "ENVIRONMENT=development" >> $GITHUB_ENV
       - name: Include repo contents in workspace
         uses: actions/checkout@v2
       - name: Install Node
