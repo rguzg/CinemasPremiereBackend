@@ -1,7 +1,7 @@
 setup:
   config:
-    ENVIRONMENT: production
-    NODE_ENV: production
+    ENVIRONMENT: 'production'
+    NODE_ENV: 'production'
 build:
   docker:
     web: Dockerfile
