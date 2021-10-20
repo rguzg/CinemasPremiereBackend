@@ -20,6 +20,6 @@ jobs:
       - name: Install Prisma CLI
         run: npm install -g prisma@1.34.10
       - name: Debug
-        run: cat ${{ GITHUB_WORKSPACE }}
+        run: cat ${{ github.workspace }}
       - name: Deploy to Prisma Cloud
-        run: prisma deploy -p ${{ GITHUB_WORKSPACE }}/prisma/prisma.yml
+        run: prisma deploy -p ${{ github.workspace }}/prisma/prisma.yml
