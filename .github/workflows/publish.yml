@@ -1,9 +1,7 @@
 name: CinemasPremiereCD
-on:
-  push
-  # push:
-  # branches:
-  #   - 'main'
+  push:
+  branches:
+    - 'main'
 jobs:
   prisma_deploy:
     name: Run Prisma Deploy
