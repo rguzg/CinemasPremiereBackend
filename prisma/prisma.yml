@@ -1,7 +1,9 @@
 endpoint: ${env:URL_BASE}/${env:ENVIRONMENT}
 databaseType: document
 datamodel:
-  - ./models/user.prisma
+  - ./models/types.prisma
+  - ./models/interfaces.prisma
+  - ./models/enums.prisma
 
 generate:
   - generator: typescript-client
