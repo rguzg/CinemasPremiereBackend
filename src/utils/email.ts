@@ -1,32 +1,12 @@
-import * as sgMail from "@sendgrid/mail";
-const { SENDGRID_API_KEY } = process.env;
-if(!SENDGRID_API_KEY) throw Error("missing SENDGRID_API_KEY")
-sgMail.setApiKey(SENDGRID_API_KEY);
+import { Prisma, prisma } from '../generated/prisma-client'
 
-const templates = {
-  password_set_confirm: {
-    id: "d-97349f713ddd42df91a9e3c7171a11bd",
-    subject: "Invitación a NumarqueCenter",
-  },
-};
+export async function generateEmail(firstName: string, lastName: string){
+  let email = `${firstName}.${lastName}@cinemaspremiere.com`;
+  let peopleWithSameName = (await prisma.users({where: {firstName, lastName}})).length;
 
-interface emailData {
-    receiver: string;
-    sender: string;
-    templateName: string;
-    dynamicData: any;
-}
+  if(peopleWithSameName > 0){
+    email = `${firstName}.${lastName}${peopleWithSameName - 1}@cinemaspremiere.com`
+  }
 
-export async function sendEmail(data: emailData) {
-  const msg = {
-    //extract the email details
-    to: data.receiver,
-    from: data.sender,
-    subject: templates[data.templateName].subject,
-    templateId: templates[data.templateName].id,
-    // extract the custom fields
-    dynamic_template_data: data.dynamicData
-  };
-  //send the email
-  return await sgMail.send(msg);
+  return email;
 }
