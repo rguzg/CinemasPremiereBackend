@@ -38,6 +38,7 @@ async function PrepareEmployeeUser(user: UserCreateInput): Promise<UserCreateInp
 }
 
 export default {
+    // This resolver ignores the email property and bankAccount from args.data
     createEmployee: async (parent, args, ctx: Context) => {
         let employee: EmployeeCreateInput = args.data;
         
