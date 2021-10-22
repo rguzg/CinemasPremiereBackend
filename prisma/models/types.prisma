@@ -18,7 +18,7 @@ type Employee implements Node {
   status: Statuses!
   department: Departments!
   movieTheater: MovieTheater! @relation(name: "TheaterEmployees")
-  user: User! @relation(name: "EmployeeUser", link: INLINE)
+  user: User! @relation(name: "EmployeeUser", link: INLINE, onDelete: CASCADE)
 }
 
 type Customer implements Node {
