@@ -3,6 +3,16 @@ input AuthPwd {
   token: String!
 }
 
+# Custom E,ployeeCreateInput made to ignore the bankAccount property
+input EmployeeCreateInput {
+  id: ID
+  salary: Int!
+  status: Statuses!
+  department: Departments!
+  movieTheater: MovieTheaterCreateOneWithoutEmployeesInput!
+  user: UserCreateOneInput!
+}
+
 type Mutation {
   setPwd(data: AuthPwd!): User!
   signup(email: String!, password: String!, name: String!): AuthPayload!

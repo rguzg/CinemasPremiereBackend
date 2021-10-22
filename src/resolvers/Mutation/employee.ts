@@ -59,7 +59,7 @@ export default {
         employee.bankAccount = GenerateBankAccount();
 
         return await ctx.prisma.createEmployee(employee);
-  },
+    },
     updateEmployee: async (parent, args, ctx: Context) => {
         let employee: EmployeeUpdateInput = args.data;
 
@@ -92,5 +92,6 @@ export default {
         }
 
         return ctx.prisma.updateEmployee({where: args.where, data: employee});
-    }
+    },
+    deleteEmployee: async(parent, args, ctx: Context) => ctx.prisma.deleteEmployee(args.data)
 };
