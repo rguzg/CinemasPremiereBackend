@@ -17,6 +17,7 @@ type Mutation {
   setPwd(data: AuthPwd!): User!
   signup(email: String!, password: String!, name: String!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
+  calculatePayroll(employee: Employee!, DaysWorked: [Days!]!): Int!
 }
 
 type Subscription {
