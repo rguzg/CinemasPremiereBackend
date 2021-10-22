@@ -17,8 +17,7 @@ type Employee implements Node {
   salary: Int!
   status: Statuses!
   department: Departments!
-  movieTheater: MovieTheater!
-    @relation(name: "AssignedMovieTheater", link: INLINE)
+  movieTheater: MovieTheater! @relation(name: "TheaterEmployees")
   user: User! @relation(name: "EmployeeUser", link: INLINE)
 }
 

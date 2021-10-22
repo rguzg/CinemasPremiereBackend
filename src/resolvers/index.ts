@@ -1,4 +1,8 @@
 import { Subscription } from './Subscription'
+import { types } from "./Types";
+
+export type UpdateRecordOperations = 'create' | 'update' | 'upsert' | 'connect';
+export type CreateRecordOperations = 'create' | 'connect';
 
 const path = require("path");
 const { mergeResolvers, fileLoader } = require("merge-graphql-schemas");
@@ -13,4 +17,5 @@ export default {
   Query,
   Mutation,
   Subscription,
+  ...types
 };
