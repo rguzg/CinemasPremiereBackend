@@ -28,6 +28,7 @@ export const permissions = shield(
       "signup": allow,
       "login": allow,
       "updateUser": and(isAuthenticated),
+      "createUser": allow,
       "*": and(isAuthenticated, or(isAdmin, isEmployee)),
     },
     MovieTheater: {
