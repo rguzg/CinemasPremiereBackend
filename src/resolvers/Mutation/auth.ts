@@ -9,7 +9,9 @@ export default {
     const password = await bcrypt.hash(args.password, 10)
     const userType = 'CUSTOMER';
 
-    const user = await ctx.prisma.createUser({ ...args, password, userType })
+    const user = await ctx.prisma.createUser({ ...args, password, userType });
+    await ctx.prisma.createCustomer({user: {connect: user}});
+
     return {
       token: jwt.sign({ userId: user.id }, process.env.SECRET, {expiresIn: "10h"}),
       user,
