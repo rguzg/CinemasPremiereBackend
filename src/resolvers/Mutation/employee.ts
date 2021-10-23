@@ -32,7 +32,7 @@ async function PrepareEmployeeUser(user: UserCreateInput): Promise<UserCreateInp
     user.email = await generateEmail(user.firstName, user.lastName);
     
     // Hash the user's password if it's a new user
-    user.password = await hash(user.password, 15);
+    user.password = await hash(user.password, 10);
 
     return user;
 }
@@ -78,13 +78,13 @@ export default {
                 break;
             case 'update':
                 if(employee.user.update.password){
-                    employee.user.update.password = await hash(employee.user.create.password, 15);
+                    employee.user.update.password = await hash(employee.user.create.password, 10);
                 }
                 break;
             case 'upsert':
                 // User is required so it's imposible for an upsert to endup as an insert
                 if(employee.user.upsert.update.password){
-                    employee.user.upsert.update.password = await hash(employee.user.upsert.update.password, 15);
+                    employee.user.upsert.update.password = await hash(employee.user.upsert.update.password, 10);
                 }
                 break;
             default:
