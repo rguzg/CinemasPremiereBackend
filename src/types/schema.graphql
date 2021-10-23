@@ -13,6 +13,11 @@ input EmployeeCreateInput {
   user: UserCreateOneInput!
 }
 
+input MembershipCreateInput {
+  customer: CustomerWhereUniqueInput!
+  type: MembershipTypes!
+}
+
 type Mutation {
   setPwd(data: AuthPwd!): User!
   signup(
