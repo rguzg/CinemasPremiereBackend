@@ -9,7 +9,7 @@ env:
   URL_BASE: ${{ secrets.URL_BASE }}
   DEPLOY_URL_BASE: ${{secrets.DEPLOY_URL_BASE}}
   SECRET: ${{secrets.SECRET}}
-  ENVRIONMENT: ${{secrets.ENVIRONMENT}}
+  ENVIRONMENT: ${{secrets.ENVIRONMENT}}
   NODE_ENV: ${{secrets.NODE_ENV}}
 jobs:
   prisma_deploy:
