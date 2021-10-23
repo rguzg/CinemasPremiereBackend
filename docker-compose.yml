@@ -14,5 +14,6 @@ services:
       ENVIRONMENT: ${ENVIRONMENT}
       URL_BASE: ${URL_BASE}
       NODE_ENV: ${NODE_ENV}
+      SECRET: ${SECRET}
     ports:
       - 4000:4000
