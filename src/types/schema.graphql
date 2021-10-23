@@ -13,6 +13,11 @@ input EmployeeCreateInput {
   user: UserCreateOneInput!
 }
 
+input MembershipCreateInput {
+  customer: CustomerWhereUniqueInput!
+  type: MembershipTypes!
+}
+
 type Mutation {
   setPwd(data: AuthPwd!): User!
   signup(
@@ -26,6 +31,10 @@ type Mutation {
 
 type Query {
   calculatePayroll(employee: EmployeeWhereUniqueInput!, DaysWorked: Int!): Int!
+  checkPoints(
+    user: UserWhereUniqueInput
+    customer: CustomerWhereUniqueInput
+  ): Int
 }
 
 type Subscription {

@@ -25,9 +25,9 @@ type Customer implements Node {
   id: ID! @id
   createdAt: DateTime @createdAt
   updatedAt: DateTime @updatedAt
-  user: User! @relation(name: "CustomerUser", link: INLINE)
+  user: User! @relation(name: "CustomerUser", link: INLINE) @unique
   points: Int! @default(value: 0)
-  membership: Membership @relation(name: "Membership", link: INLINE)
+  membership: Membership @relation(name: "Membership", link: INLINE) @unique
 }
 
 type MovieTheater implements Node {
