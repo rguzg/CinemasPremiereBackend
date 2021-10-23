@@ -1,0 +1,150 @@
+type User {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  email: String! @unique
+  password: String
+  firstName: String!
+  lastName: String!
+  userType: UserTypes!
+}
+
+type Employee implements Node {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  bankAccount: String! @unique
+  salary: Int!
+  status: Statuses!
+  department: Departments!
+  movieTheater: MovieTheater! @relation(name: "TheaterEmployees")
+  user: User! @relation(name: "EmployeeUser", link: INLINE)
+}
+
+type Customer implements Node {
+  id: ID! @id
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+  user: User! @relation(name: "CustomerUser", link: INLINE) @unique
+  points: Int! @default(value: 0)
+  membership: Membership @relation(name: "Membership", link: INLINE) @unique
+}
+
+type MovieTheater implements Node {
+  id: ID! @id
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+  name: String!
+  address: String!
+  showings: [Showing!] @relation(name: "TheaterShowings", link: INLINE)
+  screens: [Screen!] @relation(name: "TheaterScreens", link: INLINE)
+  inventory: [InventoryObject!]
+    @relation(name: "TheaterInventory", link: INLINE)
+  ticketPurchases: [TicketPurchase!]
+    @relation(name: "TheaterTicketPurchases", link: INLINE)
+  productPurchases: [ProductPurchase!]
+    @relation(name: "TheaterProductPurchases", link: INLINE)
+  employees: [Employee!] @relation(name: "TheaterEmployees", link: INLINE)
+}
+
+type InventoryObject implements Node {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String!
+  price: Int!
+  currentQuantity: Int!
+  department: Departments!
+  points: Int! @default(value: 10)
+}
+
+type ProductPurchase implements Purchase {
+  id: ID! @id
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+  price: Int!
+  purchaseMethod: PurchaseMethods!
+  paymentMethod: PaymentMethods!
+  employee: Employee @relation(name: "ProductSeller", link: INLINE)
+  customer: Customer! @relation(name: "ProductBuyer", link: INLINE)
+  purchasedItems: [InventoryObject]!
+    @relation(name: "InventoryObject", link: INLINE)
+  obtainedPoints: Int! @default(value: 0)
+  spentPoints: Int! @default(value: 0)
+}
+
+type TicketPurchase implements Purchase {
+  id: ID! @id
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+  price: Int!
+  purchaseMethod: PurchaseMethods!
+  paymentMethod: PaymentMethods!
+  employee: Employee @relation(name: "TicketSeller", link: INLINE)
+  customer: Customer! @relation(name: "TicketBuyer", link: INLINE)
+  showing: Showing! @relation(name: "Showing", link: INLINE)
+  seats: [Seat!]! @relation(name: "Seats", link: INLINE)
+  obtainedPoints: Int! @default(value: 0)
+  spentPoints: Int! @default(value: 0)
+}
+
+type Membership implements Node {
+  id: ID! @id
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+  type: MembershipTypes!
+  expirationDate: DateTime!
+}
+
+type Movie implements Node {
+  id: ID! @id
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+  title: String!
+  description: String
+  rating: Rating!
+  length: Int!
+  genres: [Genre!]! @relation(name: "MovieGenres", link: INLINE)
+  releaseDate: DateTime!
+  is3D: Boolean
+  isIMAX: Boolean
+}
+
+type Genre implements Node {
+  id: ID! @id
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+  name: String!
+  description: String
+}
+
+type Showing implements Node {
+  id: ID! @id
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+  movie: Movie! @relation(name: "ShowingMovie", link: INLINE)
+  time: DateTime!
+  screen: Screen! @relation(name: "ShowingScreen", link: INLINE)
+  seats: [Seat!]! @relation(name: "ShowingSeats", link: INLINE)
+}
+
+type Seat implements Node {
+  id: ID! @id
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+  type: SeatType!
+  isOccupied: Boolean!
+  price: Int!
+}
+
+type Screen implements Node {
+  id: ID! @id
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+  number: Int!
+  attribute: [ScreenAtributes!]
+    @relation(name: "ScreenAttributes", link: INLINE)
+  status: ScreenStatus!
+  currentlyShowing: Showing @relation(name: "CurrentShowing", link: INLINE)
+  currentSeats: [Seat!]! @relation(name: "CurrentSeats", link: INLINE)
+}

@@ -1,31 +1,19 @@
 version: '3'
 services:
-  prisma:
-    image: prismagraphql/prisma:1.34
-    restart: always
-    ports:
-    - "4466:4466"
+  app:
+    image: cinemaspremierebackend
+    container_name: cinemaspremierebackend
+    build:
+      context: .
+      args:
+        ENVIRONMENT: ${ENVIRONMENT}
+        # The URL_BASE used when generating the types used by the Prisma ORM is slightly
+        # different than the one used to call the GraphQL Server. That's why URL_BASE is here twice
+        URL_BASE: ${GENERATE_URL_BASE}
     environment:
-      PRISMA_CONFIG: |
-        port: 4466
-        # uncomment the next line and provide the env var PRISMA_MANAGEMENT_API_SECRET=my-secret to activate cluster security
-        # managementApiSecret: my-secret
-        databases:
-          default:
-            connector: mongo
-            uri: 'mongodb://prisma:prisma@mongo'
-  mongo:
-    image: mongo:3.6
-    restart: always
-    # Uncomment the next two lines to connect to your your database from outside the Docker environment, e.g. using a database GUI like Compass
-    # ports:
-    # - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: prisma
-      MONGO_INITDB_ROOT_PASSWORD: prisma
+      ENVIRONMENT: ${ENVIRONMENT}
+      URL_BASE: ${URL_BASE}
+      NODE_ENV: ${NODE_ENV}
+      SECRET: ${SECRET}
     ports:
-      - "27017:27017"
-    volumes:
-      - mongo:/var/lib/mongo
-volumes:
-  mongo:
+      - 4000:4000

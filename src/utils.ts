@@ -15,7 +15,7 @@ export function getUserId(ctx: ContextParameters): ID_Input {
     if (Authorization) {
       const token = Authorization.replace("Bearer ", "");
       if (!token) return null;
-      const { userId } = jwt.verify(token, process.env.APP_SECRET) as { userId: string; };
+      const { userId } = jwt.verify(token, process.env.SECRET) as { userId: string; };
       return userId;
     }
     return null;

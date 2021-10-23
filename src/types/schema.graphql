@@ -3,14 +3,65 @@ input AuthPwd {
   token: String!
 }
 
+# Custom E,ployeeCreateInput made to ignore the bankAccount property
+input EmployeeCreateInput {
+  id: ID
+  salary: Int!
+  status: Statuses!
+  department: Departments!
+  movieTheater: MovieTheaterCreateOneWithoutEmployeesInput!
+  user: UserCreateOneInput!
+}
+
+input MembershipCreateInput {
+  customer: CustomerWhereUniqueInput!
+  type: MembershipTypes!
+}
+
+input TicketPurchaseCreateInput {
+  showing: ShowingCreateOneInput!
+  seats: SeatCreateManyInput
+  pointsToUse: Int
+  customer: CustomerCreateOneInput!
+  employee: EmployeeCreateOneInput
+  purchaseMethod: PurchaseMethods!
+  paymentMethod: PaymentMethods!
+}
+
+input ProductPurchaseCreateInput {
+  id: ID
+  price: Int!
+  purchaseMethod: PurchaseMethods!
+  paymentMethod: PaymentMethods!
+  employee: EmployeeCreateOneInput
+  customer: CustomerCreateOneInput!
+  purchasedItems: InventoryObjectCreateManyInput
+  obtainedPoints: Int
+  spentPoints: Int
+  pointsToUse: Int
+}
+
 type Mutation {
   setPwd(data: AuthPwd!): User!
-  signup(email: String!, password: String!, name: String!): AuthPayload!
+  signup(
+    email: String!
+    password: String!
+    firstName: String!
+    lastName: String!
+  ): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
 }
 
+type Query {
+  calculatePayroll(employee: EmployeeWhereUniqueInput!, DaysWorked: Int!): Int!
+  checkPoints(
+    user: UserWhereUniqueInput
+    customer: CustomerWhereUniqueInput
+  ): Int
+}
+
 type Subscription {
-  feedSubscription: Post
+  feedSubscription: User
 }
 
 type AuthPayload {

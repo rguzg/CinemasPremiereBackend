@@ -7,9 +7,13 @@ import { Context } from '../../utils'
 export default {
   async signup(parent, args, ctx: Context) {
     const password = await bcrypt.hash(args.password, 10)
-    const user = await ctx.prisma.createUser({ ...args, password })
+    const userType = 'CUSTOMER';
+
+    const user = await ctx.prisma.createUser({ ...args, password, userType });
+    await ctx.prisma.createCustomer({user: {connect: user}});
+
     return {
-      token: jwt.sign({ userId: user.id }, process.env.APP_SECRET, {expiresIn: "10h"}),
+      token: jwt.sign({ userId: user.id }, process.env.SECRET, {expiresIn: "10h"}),
       user,
     }
   },
@@ -22,11 +26,10 @@ export default {
       }
       const valid = await bcrypt.compare(password, user.password);
       if (!valid) {
-        // throw new Error(`Invalid email or password`);
         return new ApolloError('Invalid email or password', 'ERR_AUTH')
       }
       return {
-        token: jwt.sign({ userId: user.id }, process.env.APP_SECRET, {
+        token: jwt.sign({ userId: user.id }, process.env.SECRET, {
           expiresIn: "10h",
         }),
         user,

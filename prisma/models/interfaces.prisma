@@ -1,0 +1,18 @@
+interface Node {
+  id: ID! @id
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+}
+
+interface Purchase {
+  id: ID! @id
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+  price: Int!
+  purchaseMethod: purchaseMethods!
+  paymentMethod: paymentMethods!
+  employee: Employee @relation(name: "Seller", link: INLINE)
+  customer: Customer! @relation(name: "Buyer", link: INLINE)
+  obtainedPoints: Int! @default(value: 0)
+  spentPoints: Int! @default(value: 0)
+}
