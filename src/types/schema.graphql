@@ -15,7 +15,12 @@ input EmployeeCreateInput {
 
 type Mutation {
   setPwd(data: AuthPwd!): User!
-  signup(email: String!, password: String!, name: String!): AuthPayload!
+  signup(
+    email: String!
+    password: String!
+    firstName: String!
+    lastName: String!
+  ): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
 }
 
