@@ -32,13 +32,13 @@ jobs:
     steps:
       - name: Run create .env file script
         run: |
-        touch .env
-        echo PRISMA_MANAGEMENT_API_SECRET="$PRISMA_MANAGEMENT_API" >> .env
-        echo URL_BASE="$URL_BASE" >> .env
-        echo DEPLOY_URL_BASE="$DEPLOY_URL_BASE" >> .env
-        echo SECRET="$SECRET" >> .env
-        echo ENVIRONMENT="$ENVIRONMENT" >> .env
-        echo NODE_ENV="$NODE_ENV" >> .env
+          touch .env
+          echo PRISMA_MANAGEMENT_API_SECRET="$PRISMA_MANAGEMENT_API" >> .env
+          echo URL_BASE="$URL_BASE" >> .env
+          echo DEPLOY_URL_BASE="$DEPLOY_URL_BASE" >> .env
+          echo SECRET="$SECRET" >> .env
+          echo ENVIRONMENT="$ENVIRONMENT" >> .env
+          echo NODE_ENV="$NODE_ENV" >> .env
       shell: bash
   upload_dockerhub:
     name: Upload to DockerHub
