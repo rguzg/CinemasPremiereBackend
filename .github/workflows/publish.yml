@@ -1,6 +1,3 @@
-# TODO: Remove references to InitialConfig branch and check if the actions/checkout is automatically
-# including the contents of the appropiate branch
-
 name: CinemasPremiereCD
 on:
   push:
@@ -16,11 +13,7 @@ jobs:
     name: Run Prisma Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Set ENVRIONMENT value if branch is main
-        if: ${{github.ref == 'refs/heads/main'}}
-        run: echo "ENVIRONMENT=production" >> $GITHUB_ENV
-      - name: Set ENVIRONMENT value if branch is dev
-        if: ${{github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/feature/InitialConfig'}}
+      - name: Set ENVRIONMENT value needed by Prisma Deploy
         run: echo "ENVIRONMENT=development" >> $GITHUB_ENV
       - name: Include repo contents in workspace
         uses: actions/checkout@v2
