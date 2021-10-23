@@ -58,7 +58,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           build-args: |
-          "ENVIRONMENT=${{secrets.ENVIRONMENT}}"
-          "URL_BASE=${{secrets.DEPLOY_URL_BASE}}"
+            "ENVIRONMENT=${{secrets.ENVIRONMENT}}"
+            "URL_BASE=${{secrets.DEPLOY_URL_BASE}}"
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/cinemaspremierebackend:latest
