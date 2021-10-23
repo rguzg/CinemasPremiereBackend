@@ -18,6 +18,29 @@ input MembershipCreateInput {
   type: MembershipTypes!
 }
 
+input TicketPurchaseCreateInput {
+  showing: ShowingCreateOneInput!
+  seats: SeatCreateManyInput
+  pointsToUse: Int
+  customer: CustomerCreateOneInput!
+  employee: EmployeeCreateOneInput
+  purchaseMethod: PurchaseMethods!
+  paymentMethod: PaymentMethods!
+}
+
+input ProductPurchaseCreateInput {
+  id: ID
+  price: Int!
+  purchaseMethod: PurchaseMethods!
+  paymentMethod: PaymentMethods!
+  employee: EmployeeCreateOneInput
+  customer: CustomerCreateOneInput!
+  purchasedItems: InventoryObjectCreateManyInput
+  obtainedPoints: Int
+  spentPoints: Int
+  pointsToUse: Int
+}
+
 type Mutation {
   setPwd(data: AuthPwd!): User!
   signup(
