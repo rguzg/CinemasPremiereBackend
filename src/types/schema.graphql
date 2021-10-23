@@ -31,6 +31,10 @@ type Mutation {
 
 type Query {
   calculatePayroll(employee: EmployeeWhereUniqueInput!, DaysWorked: Int!): Int!
+  checkPoints(
+    user: UserWhereUniqueInput
+    customer: CustomerWhereUniqueInput
+  ): Int
 }
 
 type Subscription {
