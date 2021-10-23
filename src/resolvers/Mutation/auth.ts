@@ -24,11 +24,10 @@ export default {
       }
       const valid = await bcrypt.compare(password, user.password);
       if (!valid) {
-        // throw new Error(`Invalid email or password`);
         return new ApolloError('Invalid email or password', 'ERR_AUTH')
       }
       return {
-        token: jwt.sign({ userId: user.id }, process.env.APP_SECRET, {
+        token: jwt.sign({ userId: user.id }, process.env.SECRET, {
           expiresIn: "10h",
         }),
         user,
